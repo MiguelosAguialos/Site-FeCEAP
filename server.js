@@ -11,7 +11,6 @@ server.use(express.static("public"))
 //A isso daqui chamaremos de: ROTA
 //Portanto estamos configurando agora a rota padrão do nosso site:
 server.get("/", function(req, res){
-    const h1 = "Ai"
     const projetos = [
         {
             img: "", 
