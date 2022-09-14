@@ -12,3 +12,5 @@ slider.oninput = function(){
     value.textContent = this.value
 }
 
+
+

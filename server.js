@@ -10,37 +10,23 @@ server.use(express.static("public"))
 //Criar acesso à raiz do nosso sistema
 //A isso daqui chamaremos de: ROTA
 //Portanto estamos configurando agora a rota padrão do nosso site:
+const projetos = [
+    {
+        img: "https://uxwing.com/wp-content/themes/uxwing/download/hand-gestures/good-icon.png", 
+        title: "Teste de projeto", 
+        category: "Nenhuma", 
+        description:"Teste para ver se o nunjuncks consegue pegar", 
+        url:"https://www.youtube.com"
+    }
+]
 server.get("/", function(req, res){
-    const projetos = [
-        {
-            img: "", 
-            title: "Teste de projeto", 
-            category: "Nenhuma", 
-            description:"Teste para ver se o nunjuncks consegue pegar", 
-            url:"https://www.youtube.com"
-        },
-        {
-            img: "", 
-            title: "", 
-            category: "", 
-            description:"", 
-            url:""
-        },
-        {
-            img: "", 
-            title: "", 
-            category: "", 
-            description:"", 
-            url:""
-        }
-    ]
     res.render("index.html", {projetos})
     // res.sendFile(__dirname+"/index.html")
-    console.log("Hello do Frontende!!!!")
+    console.log("Hello do Frontend!!!!")
 })
 
 server.get("/projects", function(req, res){
-    res.render("projects.html")
+    res.render("projects.html", {projetos})
 })
 
 server.listen(3000)
