@@ -7,22 +7,66 @@ nunjucks.configure("views",{express: server,noCache: true})
 //Configurando o servidor express para que ele "enxergue" arquivos estáticos da nossa página
 server.use(express.static("public"))
 
-//Criar acesso à raiz do nosso sistema
-//A isso daqui chamaremos de: ROTA
-//Portanto estamos configurando agora a rota padrão do nosso site:
 const projetos = [
     {
-        img: "https://uxwing.com/wp-content/themes/uxwing/download/hand-gestures/good-icon.png", 
-        title: "Teste de projeto", 
-        category: "Nenhuma", 
-        description:"Teste para ver se o nunjuncks consegue pegar", 
-        url:"https://www.youtube.com"
+        img: "https://cdn-icons-png.flaticon.com/512/3057/3057735.png",
+        title: "Por que a Terra NÃO é plana?",
+        category: "Ciências",
+        description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam aliquid repellat tempora illum unde hic dolorum doloribus ipsum quibusdam",
+        url: ""
+    }, 
+    {
+        img: "https://cdn-icons-png.flaticon.com/512/1396/1396673.png",
+        title: "O advento de battle royalle, um estudo sobre Free Fire",
+        category: "Administração",
+        description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam aliquid repellat tempora illum unde hic dolorum doloribus ipsum quibusdam",
+        url: ""
+    }, 
+    {
+        img: "https://cdn-icons-png.flaticon.com/512/4668/4668541.png",
+        title: "Satélite caseiro",
+        category: "Engenharia",
+        description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam aliquid repellat tempora illum unde hic dolorum doloribus ipsum quibusdam",
+        url: ""
+    },
+    {
+        img: "https://cdn-icons-png.flaticon.com/512/3057/3057735.png",
+        title: "Exemplo",
+        category: "Exemplo 2",
+        description: "Exemplo 3",
+        url: ""
+    },
+    {
+        img: "https://cdn-icons-png.flaticon.com/512/3057/3057735.png",
+        title: "Exemplo",
+        category: "Exemplo 2",
+        description: "Exemplo 3",
+        url: ""
+    },
+    {
+        img: "https://cdn-icons-png.flaticon.com/512/3057/3057735.png",
+        title: "Por que a Terra NÃO é plana?",
+        category: "Ciências",
+        description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam aliquid repellat tempora illum unde hic dolorum doloribus ipsum quibusdam",
+        url: ""
     }
 ]
+//Criar acesso à raiz do nosso sistema
+//A isso daqui chama<h1> Oi do backend </h1>remos de: ROTA
+//Portanto estamos configurando agora a rota padrão do nosso site:
 server.get("/", function(req, res){
-    res.render("index.html", {projetos})
+    //fazer só os 3 últimos projetos aparecerem nessa pág
+    const reversedProjetos = [...projetos].reverse();//aqui reverto a ordem dos projetos
+    let lastProjects = [];
+    //aqui uso um laço pra percorrer só 3 projetos e adiciono eles ao novo vetor
+    for (projeto of reversedProjetos) {
+        if (lastProjects.length < 3){
+            lastProjects.push(projeto)
+        }
+    }
+    res.render("index.html", {projetos: lastProjects})//passei o objeto projetos com o conteúdo do objeto lastProjetos manipulado acima
     // res.sendFile(__dirname+"/index.html")
-    console.log("Hello do Frontend!!!!")
+    console.log("Hello do Frontende!!!!")
 })
 
 server.get("/projects", function(req, res){
