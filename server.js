@@ -1,11 +1,13 @@
 const express = require("express")
 const server = express()
+const data = require('./src/data.json')
 
 const nunjucks = require("nunjucks")
 nunjucks.configure("views",{express: server,noCache: true})
 
 //Configurando o servidor express para que ele "enxergue" arquivos estáticos da nossa página
 server.use(express.static("public"))
+
 
 const projetos = [
     {
@@ -66,11 +68,15 @@ server.get("/", function(req, res){
     }
     res.render("index.html", {projetos: lastProjects})//passei o objeto projetos com o conteúdo do objeto lastProjetos manipulado acima
     // res.sendFile(__dirname+"/index.html")
-    console.log("Hello do Frontende!!!!")
 })
 
 server.get("/projects", function(req, res){
     res.render("projects.html", {projetos})
+})
+
+server.get("/data", function(req,res){
+    data.nums +=1
+    return res.json(data)
 })
 
 server.listen(3000)
